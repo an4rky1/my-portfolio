@@ -696,7 +696,7 @@ export default function Home() {
         </div>
 
         {/* ── Experience ── */}
-        <SectionReveal id="experience" className="py-16 sm:py-24">
+        <SectionReveal id="experience" className="py-12 sm:py-24">
           <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold">
@@ -706,7 +706,7 @@ export default function Home() {
               <div className="h-1 w-24 bg-acid-green mt-3 border-2 border-text-dark shadow-neo-sm"></div>
             </div>
             <div className="relative pl-8 sm:pl-12">
-              <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-1 bg-text-dark"></div>
+              <div className="absolute left-[18px] sm:left-[34px] top-0 bottom-0 w-1 bg-text-dark"></div>
               {experience.map((exp, i) => (
                 <GitNode key={i} {...exp} id={`exp-${i}`} />
               ))}

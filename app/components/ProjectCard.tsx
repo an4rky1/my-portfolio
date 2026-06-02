@@ -28,13 +28,20 @@ export default function ProjectCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const preloadedRef = useRef(false);
   const canplayHandlerRef = useRef<(() => void) | null>(null);
+  const isTouchRef = useRef(false);
   const [expanded, setExpanded] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const poster = posterFromVideo(video);
   const [showPoster, setShowPoster] = useState(true);
+
+  useEffect(() => {
+    isTouchRef.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  }, []);
 
   // start preloading video when card enters viewport
   useEffect(() => {
     if (!video || !cardRef.current || preloadedRef.current) return;
+    if (isTouchRef.current) return; // skip preload on mobile to save bandwidth
     const el = cardRef.current;
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !preloadedRef.current) {
@@ -59,13 +66,15 @@ export default function ProjectCard({
   const tryPlay = useCallback(() => {
     const v = videoRef.current;
     if (!v) return;
+    setPlaying(true);
     v.play().then(() => {
       setShowPoster(false);
     }).catch(() => {
+      setPlaying(false);
       // video not ready yet — wait for canplay
       const onCanPlay = () => {
         v.removeEventListener('canplay', onCanPlay);
-        v.play().then(() => setShowPoster(false)).catch(() => {});
+        v.play().then(() => setShowPoster(false)).catch(() => setPlaying(false));
       };
       v.addEventListener('canplay', onCanPlay);
       canplayHandlerRef.current = onCanPlay;
@@ -73,22 +82,35 @@ export default function ProjectCard({
   }, []);
 
   const handleMouseEnter = useCallback(() => {
-    if (!video) return;
+    if (!video || isTouchRef.current) return;
     tryPlay();
   }, [video, tryPlay]);
 
   const handleMouseLeave = useCallback(() => {
+    if (isTouchRef.current) return;
     const v = videoRef.current;
     if (!v) return;
     v.pause();
     v.currentTime = 0;
     setShowPoster(true);
-    // clean up pending canplay handler
+    setPlaying(false);
     if (canplayHandlerRef.current) {
       v.removeEventListener('canplay', canplayHandlerRef.current);
       canplayHandlerRef.current = null;
     }
   }, []);
+
+  const handleTap = useCallback(() => {
+    if (!video || !videoRef.current) return;
+    if (playing) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      setShowPoster(true);
+      setPlaying(false);
+    } else {
+      tryPlay();
+    }
+  }, [video, playing, tryPlay]);
 
   return (
     <div
@@ -99,7 +121,11 @@ export default function ProjectCard({
     >
       {/* video / preview — fixed height */}
       {video ? (
-        <div className="relative bg-black overflow-hidden border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
+        <div
+          className="relative bg-black overflow-hidden border-b-4 border-text-dark shrink-0"
+          style={{ height: '200px' }}
+          onClick={handleTap}
+        >
           <div className={`absolute top-0 left-0 w-full h-1 z-10 ${color}`}></div>
           {/* poster — shown instantly, hidden when video plays */}
           {showPoster && poster && (
@@ -116,8 +142,16 @@ export default function ProjectCard({
             loop
             playsInline
             preload="metadata"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover pointer-events-none"
           />
+          {/* play overlay on mobile */}
+          {showPoster && (
+            <div className="absolute inset-0 z-[2] flex items-center justify-center bg-black/20 sm:hidden">
+              <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center">
+                <i className="fas fa-play text-white text-sm ml-0.5"></i>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="relative bg-bg-light overflow-hidden flex items-center justify-center border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
