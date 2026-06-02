@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const resumeData = {
   name: 'Roman Ivanov',
   title: 'Fullstack Developer',
-  summary: 'Fullstack developer with 3+ years of experience building scalable web applications. Specialized in backend development with PHP (Laravel, Symfony) and Python (FastAPI, Django), with strong frontend skills in React and Next.js. Passionate about clean code, performance optimization, and distributed systems. Currently exploring Rust and DevOps.',
+  summary: 'Fullstack developer with 3+ years of experience building web applications. On the backend I work with PHP (Laravel, Symfony), Python (FastAPI, Django), and TypeScript (NestJS, Express). On the frontend — React, Next.js, and Vue.js. I also work with PostgreSQL, Redis, Docker, and cloud services. Currently learning Go and exploring DevOps practices.',
   contact: {
     email: 'roman.ivanov@email.com',
     github: 'github.com/an4rky1',
@@ -21,13 +21,13 @@ const resumeData = {
   },
   experience: [
     {
-      role: 'Next.js Developer',
+      role: 'Fullstack Developer',
       company: 'Freelance',
       period: '2024 - Present',
       highlights: [
-        'Built production React/Next.js applications with TypeScript',
-        'Implemented SSR and SSG for improved performance and SEO',
-        'Optimized bundle size and improved Core Web Vitals scores',
+        'Built and shipped full-stack web apps with Next.js, TypeScript, and PostgreSQL',
+        'Developed REST APIs using NestJS and Express',
+        'Containerized projects with Docker and deployed via Vercel / Render',
       ],
     },
     {
@@ -35,9 +35,9 @@ const resumeData = {
       company: 'CipherTech',
       period: '2023 - 2024',
       highlights: [
-        'Developed RESTful APIs and real-time features with Laravel',
-        'Integrated Vue.js frontend with Laravel backend',
-        'Implemented authentication and payment processing systems',
+        'Built REST APIs and real-time features with Laravel and Livewire',
+        'Set up WebSocket broadcasting via Laravel Reverb for live updates',
+        'Managed PostgreSQL databases and Redis caching',
       ],
     },
     {
@@ -45,9 +45,9 @@ const resumeData = {
       company: 'Vertex Labs',
       period: '2022 - 2023',
       highlights: [
-        'Built enterprise applications using Symfony framework',
-        'Worked with PostgreSQL, Redis, and Elasticsearch',
-        'Implemented REST APIs and microservices architecture',
+        'Developed web applications and REST APIs using Symfony',
+        'Integrated third-party services and managed MySQL / Elasticsearch',
+        'Used Docker for consistent local and production environments',
       ],
     },
     {
@@ -55,15 +55,15 @@ const resumeData = {
       company: 'Freelance',
       period: '2021 - 2022',
       highlights: [
-        'Created responsive websites using HTML, CSS, JavaScript',
-        'Worked with React.js and Next.js for modern web applications',
-        'Implemented basic state management with Redux and Context API',
+        'Built responsive UIs from mockups using HTML, CSS, JavaScript, React',
+        'Implemented pixel-perfect layouts collaborating with designers',
+        'Worked with Vue.js and Figma for design-to-code workflow',
       ],
     },
   ],
   education: [
     { degree: 'B.Sc. Computer Science', school: 'Donbas State Engineering Academy', period: '2018 - 2023' },
-    { degree: 'Applied Mathematics', school: 'Horlivka Technical College', period: '' },
+    { degree: 'Applied Mathematics', school: 'Horlivka Technical College', period: '2011 - 2014' },
   ],
 };
 

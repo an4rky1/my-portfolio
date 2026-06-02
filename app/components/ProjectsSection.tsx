@@ -31,6 +31,16 @@ export default function ProjectsSection({ projects, initialCount }: Props) {
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? projects : projects.slice(0, initialCount);
 
+  const toggleShow = () => {
+    if (showAll) {
+      setShowAll(false);
+      const el = document.getElementById('projects');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      setShowAll(true);
+    }
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -41,7 +51,7 @@ export default function ProjectsSection({ projects, initialCount }: Props) {
       {projects.length > initialCount && (
         <div className="flex justify-center mt-10">
           <button
-            onClick={() => setShowAll(!showAll)}
+            onClick={toggleShow}
             className="neo-btn inline-flex items-center gap-2 px-8 py-3 border-4 border-text-dark bg-bg-light text-text-dark font-bold shadow-neo text-sm hover:bg-acid-green"
           >
             {showAll ? (

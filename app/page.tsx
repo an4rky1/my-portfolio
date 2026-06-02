@@ -259,11 +259,11 @@ const experience = [
     branch: "origin/main",
     commit: "a1b2c3d",
     head: true,
-    title: "Next.js Developer",
+    title: "Fullstack Developer",
     company: "Freelance",
-    desc: "Building modern web applications with Next.js, TypeScript, and Tailwind CSS. Developing full-stack solutions with PostgreSQL, Drizzle ORM, and various cloud services.",
+    desc: "Built and shipped full-stack web applications using Next.js and TypeScript. Developed REST APIs with NestJS and Express, connected to PostgreSQL. Containerized and deployed projects on Vercel and Render with Docker and CI/CD pipelines.",
     icon: "fa-laptop-code",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Docker"],
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "NestJS", "Express", "Docker"],
   },
   {
     branch: "origin/laravel",
@@ -271,7 +271,7 @@ const experience = [
     head: false,
     title: "Laravel Fullstack Developer",
     company: "CipherTech",
-    desc: "Developed and maintained enterprise-level web applications using Laravel and Livewire. Designed RESTful APIs, implemented real-time features with Laravel Reverb, and managed PostgreSQL databases.",
+    desc: "Developed and deployed RESTful APIs and real-time features for client projects using Laravel and Livewire. Set up WebSocket broadcasting with Laravel Reverb for live updates. Managed PostgreSQL databases and Redis caching layer.",
     icon: "fa-bolt",
     tags: ["PHP", "Laravel", "Livewire", "PostgreSQL", "Redis", "Docker"],
   },
@@ -281,7 +281,7 @@ const experience = [
     head: false,
     title: "Symfony Fullstack Developer",
     company: "Vertex Labs",
-    desc: "Built scalable web applications using Symfony framework. Implemented complex business logic, REST APIs, and integrated third-party services. Worked with MySQL and Elasticsearch for data management.",
+    desc: "Built web applications and REST APIs for clients using Symfony framework. Integrated third-party services, worked with MySQL and Elasticsearch for data storage and search. Used Docker for local development and deployment.",
     icon: "fa-cube",
     tags: ["PHP", "Symfony", "MySQL", "Elasticsearch", "JavaScript", "Docker"],
   },
@@ -291,7 +291,7 @@ const experience = [
     head: false,
     title: "Frontend Developer",
     company: "Freelance",
-    desc: "Created responsive web interfaces using HTML, CSS, JavaScript, and React. Collaborated with designers to implement pixel-perfect layouts and smooth user experiences.",
+    desc: "Built responsive web interfaces from mockups using HTML, CSS, JavaScript, and React. Collaborated with designers to implement pixel-perfect layouts and smooth user experiences.",
     icon: "fa-paint-brush",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Figma"],
   },
@@ -316,7 +316,7 @@ const education = [
     last: true,
     edu: true,
     title: "Applied Mathematics",
-    company: "Horlivka Technical College · init commit",
+    company: "Horlivka Technical College (2011 - 2014)",
     desc: "Foundation in applied mathematics, mathematical modeling, and computational methods.",
     icon: "fa-calculator",
     tags: ["Applied Mathematics", "Mathematical Modeling"],
@@ -447,26 +447,16 @@ export default function Home() {
                   </span>
                   <br />
                   <span className="text-text-dark">
-                    fullstack_developer&rdquo;
+                    roman_ivanov&rdquo;
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-text-dark/70 max-w-xl leading-relaxed">
                   Fullstack developer with 3+ years of experience building
-                  scalable web applications. Backend-heavy specialist in PHP,
-                  Python, React, and Next.js.
+                  scalable web applications. I focus on backend
+                  development with PHP and TypeScript, and build frontends
+                  with React and Next.js. I believe in writing clean,
+                  maintainable code and learning something new every day.
                 </p>
-                <div className="flex items-center gap-3 text-sm text-text-dark/50 flex-wrap">
-                  <span className="inline-flex items-center gap-1.5 px-2 py-1 border-2 border-text-dark bg-bg-light shadow-neo-sm text-xs font-bold">
-                    <span className="text-acid-green">●</span> 3+ years
-                    experience
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-2 py-1 border-2 border-text-dark bg-bg-light shadow-neo-sm text-xs font-bold">
-                    <span className="text-acid-yellow">●</span> 10+ projects
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-2 py-1 border-2 border-text-dark bg-bg-light shadow-neo-sm text-xs font-bold">
-                    <span className="text-acid-pink">●</span> clean code
-                  </span>
-                </div>
                 <div className="flex flex-wrap gap-4 pt-2">
                   <button
                     onClick={() => scrollToSection("projects")}
@@ -497,6 +487,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="self-center md:mt-0 mt-6">
+                <div className="flex items-center gap-2 mb-2 px-4 text-xs">
+                  <span className="w-3 h-3 rounded-full bg-[#FF3366]"></span>
+                  <span className="w-3 h-3 rounded-full bg-[#FFE600]"></span>
+                  <span className="w-3 h-3 rounded-full bg-[#00FF66]"></span>
+                  <span className="text-text-dark/30 ml-2 font-mono">
+                    roman_ivanov@portfolio:~$
+                  </span>
+                </div>
                 <Terminal />
               </div>
             </div>
@@ -545,7 +543,7 @@ export default function Home() {
                       3+ years
                     </span>{" "}
                     of experience building scalable web applications.
-                    Specialized in backend development with PHP and Python, with
+                    Specialized in backend development with PHP and TypeScript, with
                     strong frontend skills in React and Next.js.
                   </p>
                   <p>
@@ -559,14 +557,14 @@ export default function Home() {
                     into <span className="text-acid-green font-bold">Go</span>{" "}
                     and systems programming.
                   </p>
-                  <p>Remote-first, based in Eastern Europe.</p>
+                  <p>Remote-first, based in Eastern Europe 🇺🇦</p>
                   <div className="pt-4 flex flex-wrap gap-3">
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-acid-green shadow-neo-sm">
                       <i className="fas fa-map-marker-alt text-[10px]"></i>{" "}
                       Remote, Eastern Europe
                     </span>
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-bg-light shadow-neo-sm">
-                      <i className="fas fa-language text-[10px]"></i> RU / EN
+                      <i className="fas fa-language text-[10px]"></i> RU / EN / UA
                     </span>
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-bg-light shadow-neo-sm">
                       <i className="fas fa-coffee text-[10px]"></i>{" "}
