@@ -805,7 +805,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-xs sm:text-sm text-text-dark/60 text-balance text-center sm:text-left">
-                © 2026{" "}
+                ©{" "}
                 <span className="text-text-dark font-bold">Roman Ivanov</span>.
                 Powered by{" "}
                 <span className="text-acid-green font-bold">

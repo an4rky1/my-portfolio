@@ -245,7 +245,7 @@ export default function Terminal() {
       addLine('  <span class="nf-k">User</span><span class="nf-s">:</span> roman');
       addLine('  <span class="nf-k">Port</span><span class="nf-s">:</span> 22');
       addLine('  <span class="nf-k">Cipher</span><span class="nf-s">:</span> chacha20-poly1305@openssh.com');
-      addLine('  <span class="text-[#00FF66]">Last login: Mon Jun  2 09:15:42 2026</span>');
+      addLine('  <span class="text-[#00FF66]">Last login: Mon Jun  2 09:15:42</span>');
     },
     'ip a': () => {
       addLine('<span class="text-[#3399FF]">1: lo</span>: &lt;LOOPBACK,UP&gt; mtu 65536');
