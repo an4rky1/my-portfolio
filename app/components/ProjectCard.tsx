@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 interface ProjectCardProps {
   title: string;
@@ -15,33 +15,59 @@ interface ProjectCardProps {
   demoLink?: string;
 }
 
+function posterFromVideo(video?: string): string | undefined {
+  if (!video) return undefined;
+  const match = video.match(/\/(\d+)\.mp4$/);
+  return match ? `/projects/posters/${match[1]}.webp` : undefined;
+}
+
 export default function ProjectCard({
   title, color, status, statusBg, description, tags, hoverBg, video, codeLink, demoLink,
 }: ProjectCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [expanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const poster = posterFromVideo(video);
 
-  const play = () => {
-    if (!videoRef.current) return;
-    videoRef.current.play();
-  };
+  const [showPoster, setShowPoster] = useState(true);
 
-  const pause = () => {
+  const handleMouseEnter = useCallback(() => {
+    if (!video || !videoRef.current) return;
+    setLoading(true);
+    videoRef.current.play().then(() => {
+      setShowPoster(false);
+      setLoading(false);
+    }).catch(() => {
+      setLoading(false);
+    });
+  }, [video]);
+
+  const handleMouseLeave = useCallback(() => {
     if (!videoRef.current) return;
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
-  };
+    setShowPoster(true);
+    setLoading(false);
+  }, []);
 
   return (
     <div
       className="neo-card border-4 border-text-dark bg-bg-light shadow-neo overflow-hidden flex flex-col group h-full"
-      onMouseEnter={play}
-      onMouseLeave={pause}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* video / preview — fixed height */}
       {video ? (
         <div className="relative bg-black overflow-hidden border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
           <div className={`absolute top-0 left-0 w-full h-1 z-10 ${color}`}></div>
+          {/* poster — shown instantly, hidden when video plays */}
+          {showPoster && poster && (
+            <img
+              src={poster}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover z-[1]"
+            />
+          )}
           <video
             ref={videoRef}
             src={video}
@@ -51,6 +77,12 @@ export default function ProjectCard({
             preload="metadata"
             className="w-full h-full object-cover"
           />
+          {/* loading overlay */}
+          {loading && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/50">
+              <div className="w-6 h-6 border-2 border-acid-green border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="relative bg-bg-light overflow-hidden flex items-center justify-center border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
