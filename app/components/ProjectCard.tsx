@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
 interface ProjectCardProps {
   title: string;
@@ -25,33 +25,74 @@ export default function ProjectCard({
   title, color, status, statusBg, description, tags, hoverBg, video, codeLink, demoLink,
 }: ProjectCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const preloadedRef = useRef(false);
+  const canplayHandlerRef = useRef<(() => void) | null>(null);
   const [expanded, setExpanded] = useState(false);
-  const [loading, setLoading] = useState(false);
   const poster = posterFromVideo(video);
-
   const [showPoster, setShowPoster] = useState(true);
 
-  const handleMouseEnter = useCallback(() => {
-    if (!video || !videoRef.current) return;
-    setLoading(true);
-    videoRef.current.play().then(() => {
-      setShowPoster(false);
-      setLoading(false);
-    }).catch(() => {
-      setLoading(false);
-    });
+  // start preloading video when card enters viewport
+  useEffect(() => {
+    if (!video || !cardRef.current || preloadedRef.current) return;
+    const el = cardRef.current;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !preloadedRef.current) {
+        preloadedRef.current = true;
+        if (videoRef.current) {
+          videoRef.current.preload = 'auto';
+          videoRef.current.load();
+        }
+        // also preload via <link> for faster discovery
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'video';
+        link.href = video;
+        document.head.appendChild(link);
+        obs.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [video]);
 
+  const tryPlay = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.play().then(() => {
+      setShowPoster(false);
+    }).catch(() => {
+      // video not ready yet — wait for canplay
+      const onCanPlay = () => {
+        v.removeEventListener('canplay', onCanPlay);
+        v.play().then(() => setShowPoster(false)).catch(() => {});
+      };
+      v.addEventListener('canplay', onCanPlay);
+      canplayHandlerRef.current = onCanPlay;
+    });
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!video) return;
+    tryPlay();
+  }, [video, tryPlay]);
+
   const handleMouseLeave = useCallback(() => {
-    if (!videoRef.current) return;
-    videoRef.current.pause();
-    videoRef.current.currentTime = 0;
+    const v = videoRef.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
     setShowPoster(true);
-    setLoading(false);
+    // clean up pending canplay handler
+    if (canplayHandlerRef.current) {
+      v.removeEventListener('canplay', canplayHandlerRef.current);
+      canplayHandlerRef.current = null;
+    }
   }, []);
 
   return (
     <div
+      ref={cardRef}
       className="neo-card border-4 border-text-dark bg-bg-light shadow-neo overflow-hidden flex flex-col group h-full"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -77,12 +118,6 @@ export default function ProjectCard({
             preload="metadata"
             className="w-full h-full object-cover"
           />
-          {/* loading overlay */}
-          {loading && (
-            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/50">
-              <div className="w-6 h-6 border-2 border-acid-green border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )}
         </div>
       ) : (
         <div className="relative bg-bg-light overflow-hidden flex items-center justify-center border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
