@@ -227,7 +227,7 @@ const projects = [
     statusBg: "bg-acid-yellow",
     hoverBg: "hover:bg-acid-yellow",
     video: undefined,
-    codeLink: undefined,
+    codeLink: "https://github.com/an4rky1/core",
     demoLink: undefined,
   },
   {
@@ -249,7 +249,7 @@ const projects = [
     statusBg: "bg-acid-yellow",
     hoverBg: "hover:bg-acid-yellow",
     video: undefined,
-    codeLink: undefined,
+    codeLink: "https://github.com/an4rky1/pet-saas",
     demoLink: undefined,
   },
 ];
@@ -263,7 +263,14 @@ const experience = [
     company: "Freelance",
     desc: "Built and shipped full-stack web applications using Next.js and TypeScript. Developed REST APIs with NestJS and Express, connected to PostgreSQL. Containerized and deployed projects on Vercel and Render with Docker and CI/CD pipelines.",
     icon: "fa-laptop-code",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "NestJS", "Express", "Docker"],
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "NestJS",
+      "Express",
+      "Docker",
+    ],
   },
   {
     branch: "origin/laravel",
@@ -339,17 +346,17 @@ const contacts = [
     arrowHover: true,
   },
   {
-    href: "https://linkedin.com/in/an4rky1",
+    href: "https://www.linkedin.com/in/roman-ivanov-b19528410/",
     icon: "fab fa-linkedin",
     label: "LinkedIn",
-    url: "linkedin.com/in/an4rky1",
+    url: "linkedin.com/in/roman-ivanov-b19528410/",
     arrowHover: true,
   },
   {
-    href: "mailto:roman.ivanov@email.com",
+    href: "mailto:anarky13proton.me",
     icon: "fas fa-envelope",
     label: "Email",
-    url: "roman.ivanov@email.com",
+    url: "anarky13@proton.me",
     arrowHover: true,
   },
 ];
@@ -446,16 +453,14 @@ export default function Home() {
                     &ldquo;Hello, I&apos;m
                   </span>
                   <br />
-                  <span className="text-text-dark">
-                    roman_ivanov&rdquo;
-                  </span>
+                  <span className="text-text-dark">roman_ivanov&rdquo;</span>
                 </h1>
                 <p className="text-base sm:text-lg text-text-dark/70 max-w-xl leading-relaxed">
                   Fullstack developer with 3+ years of experience building
-                  scalable web applications. I focus on backend
-                  development with PHP and TypeScript, and build frontends
-                  with React and Next.js. I believe in writing clean,
-                  maintainable code and learning something new every day.
+                  scalable web applications. I focus on backend development with
+                  PHP and TypeScript, and build frontends with React and
+                  Next.js. I believe in writing clean, maintainable code and
+                  learning something new every day.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-2">
                   <button
@@ -543,8 +548,8 @@ export default function Home() {
                       3+ years
                     </span>{" "}
                     of experience building scalable web applications.
-                    Specialized in backend development with PHP and TypeScript, with
-                    strong frontend skills in React and Next.js.
+                    Specialized in backend development with PHP and TypeScript,
+                    with strong frontend skills in React and Next.js.
                   </p>
                   <p>
                     <span className="text-text-dark font-bold">
@@ -564,7 +569,8 @@ export default function Home() {
                       Remote, Eastern Europe
                     </span>
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-bg-light shadow-neo-sm">
-                      <i className="fas fa-language text-[10px]"></i> RU / EN / UA
+                      <i className="fas fa-language text-[10px]"></i> RU / EN /
+                      UA
                     </span>
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-bg-light shadow-neo-sm">
                       <i className="fas fa-coffee text-[10px]"></i>{" "}
