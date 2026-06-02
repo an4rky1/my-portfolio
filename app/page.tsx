@@ -507,7 +507,7 @@ export default function Home() {
         </SectionReveal>
 
         {/* ── Separator ── */}
-        <div className="flex items-center gap-2 sm:gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
             <i className="fas fa-chevron-down text-acid-green text-[10px]"></i>
@@ -660,7 +660,7 @@ export default function Home() {
         </SectionReveal>
 
         {/* ── Separator ── */}
-        <div className="flex items-center gap-2 sm:gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
             <i className="fas fa-chevron-down text-acid-yellow text-[10px]"></i>
@@ -685,7 +685,7 @@ export default function Home() {
         </SectionReveal>
 
         {/* ── Separator ── */}
-        <div className="flex items-center gap-2 sm:gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
             <i className="fas fa-chevron-down text-acid-purple text-[10px]"></i>
@@ -706,7 +706,7 @@ export default function Home() {
               <div className="h-1 w-24 bg-acid-green mt-3 border-2 border-text-dark shadow-neo-sm"></div>
             </div>
             <div className="relative pl-8 sm:pl-12">
-              <div className="absolute left-[21px] sm:left-[42px] top-0 bottom-0 w-[3px] bg-text-dark"></div>
+              <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-1 bg-text-dark"></div>
               {experience.map((exp, i) => (
                 <GitNode key={i} {...exp} id={`exp-${i}`} />
               ))}
@@ -718,7 +718,7 @@ export default function Home() {
         </SectionReveal>
 
         {/* ── Separator ── */}
-        <div className="flex items-center gap-2 sm:gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
             <i className="fas fa-chevron-down text-acid-pink text-[10px]"></i>

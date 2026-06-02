@@ -37,8 +37,14 @@ body {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.ide-tab {
-  transition: background-color 0.2s ease, transform 0.15s ease;
+.neo-btn:hover, .neo-card:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #1A1A1A;
+}
+
+.neo-btn:active, .neo-card:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px 0px #1A1A1A;
 }
 
 .ide-tab.active {
@@ -46,85 +52,18 @@ body {
   color: #1A1A1A;
 }
 
-.contact-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+.ide-tab {
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.contact-icon-wrap {
-  transition: transform 0.2s ease;
-}
-
-.skill-tag {
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
-}
-
-/* hover effects only on devices that support hover */
-@media (hover: hover) {
-  .neo-btn:hover, .neo-card:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px 0px #1A1A1A;
-  }
-
-  .neo-btn:active, .neo-card:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0px 0px 0px 0px #1A1A1A;
-  }
-
-  .ide-tab:hover {
-    background-color: #FFE600;
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px 0px #1A1A1A;
-  }
-
-  .skill-tag:hover {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0px 0px #1A1A1A;
-  }
-
-  .skill-tag:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px 0px #1A1A1A;
-  }
-
-  .contact-card:hover {
-    transform: translate(3px, 3px);
-    box-shadow: 2px 2px 0px 0px #1A1A1A;
-  }
-
-  .contact-card:hover .contact-icon-wrap {
-    transform: scale(1.1) rotate(-3deg);
-  }
-
-  .git-node:hover .git-node-circle {
-    background-color: #00FF66;
-    box-shadow: 0 0 12px #00FF66;
-  }
+.ide-tab:hover {
+  background-color: #FFE600;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #1A1A1A;
 }
 
 .git-node-circle {
-  transition: all 0.2s ease;
-  border: 3px solid #1A1A1A;
-}
-
-.git-node-circle--hovered {
-  background-color: #00FF66;
-  box-shadow: 0 0 12px #00FF66;
-}
-
-.git-node-circle--clicked {
-  border-color: #00FF66 !important;
-  background-color: #00FF66 !important;
-  box-shadow: 0 0 12px #00FF66 !important;
-}
-
-.git-node .neo-card {
-  border: 3px solid #1A1A1A;
-  box-shadow: 4px 4px 0px 0px #1A1A1A;
-}
-
-.git-node-card--hovered {
-  border-color: #00FF66 !important;
-  box-shadow: 6px 6px 0px 0px #00FF66 !important;
+  transition: all 0.3s ease;
 }
 
 .git-node:hover .git-node-circle {
@@ -162,13 +101,7 @@ body {
 .section-reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-@media (max-width: 640px) {
-  .section-reveal {
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .section-reveal.revealed {
@@ -184,6 +117,10 @@ body {
 
 @keyframes fadeIn {
   to { opacity: 1; }
+}
+
+.git-node .neo-card:hover {
+  transform: none !important;
 }
 
 .skill-tag {
