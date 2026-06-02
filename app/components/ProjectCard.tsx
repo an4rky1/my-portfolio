@@ -15,15 +15,11 @@ interface ProjectCardProps {
   demoLink?: string;
 }
 
-const TRUNCATE_LENGTH = 100;
-
 export default function ProjectCard({
   title, color, status, statusBg, description, tags, hoverBg, video, codeLink, demoLink,
 }: ProjectCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const truncated = description.length > TRUNCATE_LENGTH;
-  const displayDesc = truncated && !expanded ? description.slice(0, TRUNCATE_LENGTH) + '...' : description;
 
   const play = () => {
     if (!videoRef.current) return;
@@ -38,12 +34,14 @@ export default function ProjectCard({
 
   return (
     <div
-      className="neo-card border-4 border-text-dark bg-bg-light shadow-neo overflow-hidden flex flex-col"
+      className="neo-card border-4 border-text-dark bg-bg-light shadow-neo overflow-hidden flex flex-col group h-full"
       onMouseEnter={play}
       onMouseLeave={pause}
     >
+      {/* video / preview — fixed height */}
       {video ? (
-        <div className="relative bg-black overflow-hidden" style={{ height: '200px' }}>
+        <div className="relative bg-black overflow-hidden border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
+          <div className={`absolute top-0 left-0 w-full h-1 z-10 ${color}`}></div>
           <video
             ref={videoRef}
             src={video}
@@ -55,8 +53,8 @@ export default function ProjectCard({
           />
         </div>
       ) : (
-        <div className="relative bg-bg-light overflow-hidden flex items-center justify-center border-b-2 border-text-dark" style={{ height: '200px' }}>
-          <div className={`absolute top-0 left-0 w-full ${color} h-3`}></div>
+        <div className="relative bg-bg-light overflow-hidden flex items-center justify-center border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
+          <div className={`absolute top-0 left-0 w-full ${color} h-1`}></div>
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(45deg, #1A1A1A 25%, transparent 25%, transparent 75%, #1A1A1A 75%), linear-gradient(45deg, #1A1A1A 25%, transparent 25%, transparent 75%, #1A1A1A 75%)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 10px 10px' }}></div>
           <div className="flex flex-col items-center gap-2 z-10">
             <i className="fas fa-code text-4xl text-text-dark/20"></i>
@@ -64,53 +62,79 @@ export default function ProjectCard({
           </div>
         </div>
       )}
-      <div className="p-5 sm:p-6 flex flex-col flex-1">
-        <div className="flex items-start justify-between mb-3">
-          <h3 className="text-base sm:text-lg font-bold text-text-dark break-all leading-tight">
-            <i className={`fas fa-folder ${color} mr-2`}></i>
+
+      {/* content — fills remaining space evenly */}
+      <div className="p-5 sm:p-6 flex flex-col flex-1 gap-2">
+        {/* title + status */}
+        <div className="flex items-start justify-between gap-3 shrink-0">
+          <h3 className="text-base sm:text-lg font-bold text-text-dark break-all leading-tight flex items-center gap-2">
+            <span className={`w-3 h-3 border-2 border-text-dark ${color} shadow-neo-sm shrink-0`}></span>
             {title}
           </h3>
-          <span className={`inline-block px-2 py-1 border-2 border-text-dark text-[10px] font-bold ${statusBg} shadow-neo-sm shrink-0 ml-2 leading-tight`}>
+          <span className={`inline-block px-2 py-1 border-2 border-text-dark text-[10px] font-bold ${statusBg} shadow-neo-sm shrink-0 leading-tight`}>
             {status}
           </span>
         </div>
-        <p className="text-sm text-text-dark/70 leading-relaxed">
-          {displayDesc}
-          {truncated && (
+
+        {/* description — fills available space, clamped at 3 lines */}
+        <div className="flex-1 min-h-0">
+          <p className={`text-xs sm:text-sm text-text-dark/70 leading-relaxed ${!expanded ? 'line-clamp-3' : ''}`}>
+            {description}
+          </p>
+          {description.length > 130 && (
             <button
               onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
-              className="ml-1 text-acid-green font-bold hover:underline"
+              className="text-acid-green font-bold text-[11px] hover:underline mt-0.5"
             >
               {expanded ? 'show_less()' : 'show_more()'}
             </button>
           )}
-        </p>
-        <div className="mt-auto flex flex-col gap-3">
-          <div className="flex flex-wrap gap-1.5">
-            {tags.map((t) => (
-              <span key={t} className="px-2 py-1 border-2 border-text-dark text-[10px] font-bold bg-bg-light leading-tight">{t}</span>
-            ))}
-          </div>
-          <div className="flex gap-3">
-            {codeLink && codeLink !== '#' ? (
-              <a href={codeLink} target="_blank" rel="noopener noreferrer" className={`neo-btn flex-1 text-center py-2 border-2 border-text-dark bg-bg-light text-sm font-bold shadow-neo-sm ${hoverBg}`}>
-                <i className="fab fa-github mr-1"></i>code
-              </a>
-            ) : (
-              <span className="neo-btn flex-1 text-center py-2 border-2 border-text-dark bg-bg-light text-sm font-bold shadow-neo-sm opacity-50 cursor-not-allowed">
-                <i className="fab fa-github mr-1"></i>code
+        </div>
+
+        {/* tags — pinned to bottom, compact */}
+        <div className="flex flex-wrap gap-1.5 shrink-0">
+          {tags.map((t, i) => {
+            const tagColors = [
+              'bg-blue-50 text-blue-700 border-blue-300',
+              'bg-green-50 text-green-700 border-green-300',
+              'bg-yellow-50 text-yellow-700 border-yellow-300',
+              'bg-purple-50 text-purple-700 border-purple-300',
+              'bg-pink-50 text-pink-700 border-pink-300',
+              'bg-orange-50 text-orange-700 border-orange-300',
+            ];
+            const tc = tagColors[i % tagColors.length];
+            return (
+              <span
+                key={t}
+                className={`skill-tag inline-flex items-center gap-1 px-2 py-1 border-2 border-text-dark ${tc} text-[10px] font-bold shadow-neo-sm leading-tight cursor-default`}
+              >
+                <i className="fas fa-hashtag text-[8px] opacity-50"></i>
+                {t}
               </span>
-            )}
-            {demoLink ? (
-              <a href={demoLink} target="_blank" rel="noopener noreferrer" className={`neo-btn flex-1 text-center py-2 border-2 border-text-dark bg-bg-light text-sm font-bold shadow-neo-sm ${hoverBg}`}>
-                <i className="fas fa-external-link-alt mr-1"></i>demo
-              </a>
-            ) : (
-              <span className="neo-btn flex-1 text-center py-2 border-2 border-text-dark bg-bg-light text-sm font-bold shadow-neo-sm opacity-50 cursor-not-allowed">
-                <i className="fas fa-external-link-alt mr-1"></i>demo
-              </span>
-            )}
-          </div>
+            );
+          })}
+        </div>
+
+        {/* buttons — always at the bottom */}
+        <div className="flex gap-3 shrink-0 pt-2 border-t-2 border-text-dark/10">
+          {codeLink && codeLink !== '#' ? (
+            <a href={codeLink} target="_blank" rel="noopener noreferrer" className={`neo-btn flex-1 text-center py-2.5 border-2 border-text-dark bg-bg-light text-sm font-bold shadow-neo-sm ${hoverBg} transition-all`}>
+              <i className="fab fa-github mr-1.5"></i>code
+            </a>
+          ) : (
+            <span className="neo-btn flex-1 text-center py-2.5 border-2 border-text-dark bg-gray-100 text-sm font-bold shadow-neo-sm opacity-50 cursor-not-allowed">
+              <i className="fab fa-github mr-1.5"></i>code
+            </span>
+          )}
+          {demoLink ? (
+            <a href={demoLink} target="_blank" rel="noopener noreferrer" className={`neo-btn flex-1 text-center py-2.5 border-2 border-text-dark bg-bg-light text-sm font-bold shadow-neo-sm ${hoverBg} transition-all`}>
+              <i className="fas fa-external-link-alt mr-1.5"></i>demo
+            </a>
+          ) : (
+            <span className="neo-btn flex-1 text-center py-2.5 border-2 border-text-dark bg-gray-100 text-sm font-bold shadow-neo-sm opacity-50 cursor-not-allowed">
+              <i className="fas fa-external-link-alt mr-1.5"></i>demo
+            </span>
+          )}
         </div>
       </div>
     </div>
