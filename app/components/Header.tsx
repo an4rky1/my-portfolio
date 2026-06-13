@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { scrollToSection } from '@/lib/navigation';
 
 const sections = ['hero', 'about_me', 'projects', 'experience', 'contacts'];
 const extensions: Record<string, string> = {
@@ -42,12 +43,7 @@ export default function Header() {
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const target = document.getElementById(id);
-    if (target) {
-      const header = document.querySelector('header');
-      const offset = header ? header.offsetHeight : 0;
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
-    }
+    scrollToSection(id);
     setMobileOpen(false);
   };
 
@@ -65,6 +61,7 @@ export default function Header() {
             <span className="text-text-dark">$</span>
             <span className="hidden sm:inline">cd</span>
             <span className="text-acid-green">~/roman</span>
+            <span className="cursor-blink text-acid-green text-base">█</span>
           </a>
           <nav className="hidden md:flex items-center gap-1">
             {sections.map((id) => (
@@ -92,23 +89,29 @@ export default function Header() {
             </button>
           </div>
         </div>
-        {mobileOpen && (
-          <div id="mobile-menu" className="md:hidden pb-4 border-t-2 border-text-dark mt-2 pt-4">
-            <div className="flex flex-col gap-2">
-              {sections.map((id) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={(e) => handleNav(e, id)}
-                  className="neo-btn px-4 py-2 text-sm border-2 border-text-dark shadow-neo-sm bg-bg-light font-medium"
-                >
-                  {id}
-                  {extensions[id]}
-                </a>
-              ))}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${
+            mobileOpen ? 'max-h-80 opacity-100 border-t-2 border-text-dark pb-4 pt-4 mt-2' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {mobileOpen && (
+            <div id="mobile-menu">
+              <div className="flex flex-col gap-2">
+                {sections.map((id) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={(e) => handleNav(e, id)}
+                    className="neo-btn px-4 py-2 text-sm border-2 border-text-dark shadow-neo-sm bg-bg-light font-medium"
+                  >
+                    {id}
+                    {extensions[id]}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </header>
   );

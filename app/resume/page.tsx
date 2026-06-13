@@ -7,17 +7,18 @@ const resumeData = {
   title: 'Fullstack Developer',
   summary: 'Fullstack developer with 3+ years of experience building web applications. On the backend I work with PHP (Laravel, Symfony), Python (FastAPI, Django), and TypeScript (NestJS, Express). On the frontend — React, Next.js, and Vue.js. I also work with PostgreSQL, Redis, Docker, and cloud services. Currently learning Go and exploring DevOps practices.',
   contact: {
-    email: 'roman.ivanov@email.com',
+    email: 'anarky13@proton.me',
     github: 'github.com/an4rky1',
-    linkedin: 'linkedin.com/in/an4rky1',
+    linkedin: 'linkedin.com/in/roman-ivanov-b19528410/',
+    telegram: 't.me/an4rky1',
     location: 'Ukraine, Remote',
     languages: 'English (B2), Russian (Native), Ukrainian (Native)',
   },
   skills: {
-    Languages: 'Python, Go, TypeScript, JavaScript, PHP, SQL, Rust',
-    Frameworks: 'Laravel, Symfony, FastAPI, Django, React, Next.js, Vue.js',
+    Languages: 'Python, Go, TypeScript, JavaScript, PHP, SQL, Rust, Bash',
+    Frameworks: 'Laravel, Symfony, FastAPI, Django, React, Next.js, Vue.js, NestJS, Express',
     Databases: 'PostgreSQL, MySQL, Redis, MongoDB, Elasticsearch',
-    Infrastructure: 'Docker, Kubernetes, AWS, GCP, Terraform, CI/CD',
+    Infrastructure: 'Docker, K8s, AWS, GCP, Terraform, CI/CD, Linux',
   },
   experience: [
     {
@@ -96,10 +97,11 @@ export default function ResumePage() {
               <p className="text-sm sm:text-base text-text-dark/60 font-semibold">{resumeData.title}</p>
             </div>
             <div className="text-right text-xs sm:text-sm text-text-dark/60 leading-relaxed">
-              <div>{resumeData.contact.email}</div>
-              <div>{resumeData.contact.github}</div>
-              <div>{resumeData.contact.linkedin}</div>
-              <div>{resumeData.contact.location}</div>
+              <div><a href={`mailto:${resumeData.contact.email}`} className="hover:text-acid-green transition-colors">{resumeData.contact.email}</a></div>
+              <div><a href={`https://${resumeData.contact.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-acid-green transition-colors">{resumeData.contact.github}</a></div>
+              <div><a href={`https://${resumeData.contact.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-acid-green transition-colors">{resumeData.contact.linkedin}</a></div>
+              <div><a href={`https://${resumeData.contact.telegram}`} target="_blank" rel="noopener noreferrer" className="hover:text-acid-green transition-colors">{resumeData.contact.telegram}</a></div>
+              <div className="text-text-dark/40">{resumeData.contact.location}</div>
             </div>
           </div>
 

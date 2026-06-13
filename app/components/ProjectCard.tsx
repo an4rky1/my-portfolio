@@ -38,10 +38,10 @@ export default function ProjectCard({
     isTouchRef.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   }, []);
 
-  // start preloading video when card enters viewport
+  // start buffering video when card is near viewport
   useEffect(() => {
     if (!video || !cardRef.current || preloadedRef.current) return;
-    if (isTouchRef.current) return; // skip preload on mobile to save bandwidth
+    if (isTouchRef.current) return;
     const el = cardRef.current;
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !preloadedRef.current) {
@@ -50,15 +50,9 @@ export default function ProjectCard({
           videoRef.current.preload = 'auto';
           videoRef.current.load();
         }
-        // also preload via <link> for faster discovery
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'video';
-        link.href = video;
-        document.head.appendChild(link);
         obs.disconnect();
       }
-    }, { rootMargin: '200px' });
+    }, { rootMargin: '100px' });
     obs.observe(el);
     return () => obs.disconnect();
   }, [video]);
@@ -131,7 +125,7 @@ export default function ProjectCard({
           {showPoster && poster && (
             <img
               src={poster}
-              alt=""
+              alt={`${title} preview`}
               className="absolute inset-0 w-full h-full object-cover z-[1]"
             />
           )}
@@ -146,8 +140,8 @@ export default function ProjectCard({
           />
           {/* play overlay on mobile */}
           {showPoster && (
-            <div className="absolute inset-0 z-[2] flex items-center justify-center bg-black/20 sm:hidden">
-              <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center">
+            <div className="absolute inset-0 z-[2] flex items-center justify-center bg-black/20 sm:hidden pointer-events-none">
+              <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center pointer-events-none">
                 <i className="fas fa-play text-white text-sm ml-0.5"></i>
               </div>
             </div>

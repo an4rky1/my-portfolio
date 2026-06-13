@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 
 interface Project {
@@ -19,33 +19,48 @@ interface Props {
   initialCount: number;
 }
 
-const colors = ['bg-acid-green', 'bg-acid-yellow', 'bg-acid-purple'] as const;
-const statuses = [
-  { status: '[status: production]', bg: 'bg-acid-green' },
-  { status: '[status: in_development]', bg: 'bg-acid-yellow' },
-  { status: '[status: refactoring]', bg: 'bg-purple-200 text-purple-900' },
-] as const;
-const hovers = ['hover:bg-acid-green', 'hover:bg-acid-yellow', 'hover:bg-purple-200'] as const;
+function AnimatedCard({ children, delay }: { children: React.ReactNode; delay: number }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <div
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0) scale(1)' : 'translateY(12px) scale(0.97)',
+        transition: 'opacity 0.35s ease-out, transform 0.35s ease-out',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function ProjectsSection({ projects, initialCount }: Props) {
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? projects : projects.slice(0, initialCount);
 
   const toggleShow = () => {
-    if (showAll) {
-      setShowAll(false);
-      const el = document.getElementById('projects');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      setShowAll(true);
-    }
+    setShowAll(!showAll);
   };
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {visible.map((p) => (
-          <ProjectCard key={p.title} {...p} />
+        {visible.map((p, i) => (
+          i >= initialCount ? (
+            <AnimatedCard key={p.title} delay={(i - initialCount) * 80}>
+              <ProjectCard {...p} />
+            </AnimatedCard>
+          ) : (
+            <div key={p.title}>
+              <ProjectCard {...p} />
+            </div>
+          )
         ))}
       </div>
       {projects.length > initialCount && (

@@ -73,7 +73,7 @@ export default function Terminal() {
       addLine('<span class="text-[#3399FF]">GitHub:</span>    github.com/an4rky1');
       addLine('<span class="text-[#3399FF]">Telegram:</span>  t.me/an4rky1');
       addLine('<span class="text-[#3399FF]">LinkedIn:</span>  linkedin.com/in/an4rky1');
-      addLine('<span class="text-[#3399FF]">Email:</span>     roman.ivanov@email.com');
+      addLine('<span class="text-[#3399FF]">Email:</span>     anarky13@proton.me');
       addLine('<span class="text-[#3399FF]">Location:</span>  Ukraine, Remote');
     },
     status: () => {
@@ -381,32 +381,42 @@ export default function Terminal() {
       onKeyDown={handleKeyDown}
     >
       <div className="border-4 border-text-dark shadow-neo-lg overflow-hidden bg-terminal-bg flex flex-col flex-1">
-        <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d2d] border-b border-gray-600 shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
-            <div className="w-3 h-3 rounded-full bg-[#febc2e]"></div>
-            <div className="w-3 h-3 rounded-full bg-[#28c840]"></div>
+        <div className="flex items-center justify-between px-4 py-2 bg-[#252525] border-b border-gray-700/50 shrink-0 select-none">
+          <div className="flex items-center gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-[#FF3366] hover:brightness-125 transition-all"></div>
+            <div className="w-3 h-3 rounded-full bg-[#FFE600] hover:brightness-125 transition-all"></div>
+            <div className="w-3 h-3 rounded-full bg-[#00FF66] hover:brightness-125 transition-all"></div>
           </div>
-          <span className="text-gray-400 text-[10px] sm:text-xs">~/roman — zsh</span>
+          <span className="text-gray-500 text-[10px] sm:text-xs font-mono">
+            <span className="text-[#00FF66]">roman_ivanov</span>
+            <span className="text-gray-600">@</span>
+            <span className="text-[#00FF66]">portfolio</span>
+            <span className="text-gray-600">:~$</span>
+          </span>
         </div>
         <div
           className="p-3 sm:p-4 cursor-text select-text flex-1 overflow-y-auto text-gray-300"
           style={{ minHeight: '20rem', maxHeight: '26rem' }}
           onClick={() => setActive(true)}
         >
-          <div ref={outputRef} className="text-[11px] sm:text-xs leading-snug"></div>
+          <div ref={outputRef} className="text-[11px] sm:text-xs leading-relaxed"></div>
           {inputLineVisible && (
-            <div className="mt-1 pt-1 border-t border-gray-600/50 text-[11px] sm:text-xs text-gray-300">
-              <span className="text-acid-green">❯</span>
-              <span className="ml-1">{input}</span>
-              <span className="cursor-blink text-acid-green">█</span>
+            <div className="mt-2 pt-2 border-t border-gray-700/30 text-[11px] sm:text-xs text-gray-300">
+              <span className="text-acid-green font-bold">❯</span>
+              <span className="ml-2 text-gray-200">{input}</span>
+              <span className="cursor-blink text-acid-green ml-0.5">█</span>
             </div>
           )}
         </div>
       </div>
-      <p className="text-[10px] text-gray-400 mt-2 text-center shrink-0">
-        <i className="fas fa-keyboard mr-1"></i>type `help` for available commands
-      </p>
+      <div className="flex items-center justify-between mt-2 shrink-0 px-1">
+        <p className="text-[10px] text-gray-600">
+          <span className="text-gray-600">⏎</span> <span className="text-gray-500">type</span> <span className="text-[#00FF66]">help</span> <span className="text-gray-500">for commands</span>
+        </p>
+        <p className="text-[10px] text-gray-600">
+          {active ? <span className="text-[#00FF66]">●</span> : <span className="text-gray-600">●</span>} {active ? 'ready' : 'focus to type'}
+        </p>
+      </div>
     </div>
   );
 }

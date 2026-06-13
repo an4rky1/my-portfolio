@@ -11,9 +11,14 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "~/roman — portfolio",
   description: "Fullstack developer portfolio — Roman Ivanov. Python, Go, TypeScript, PHP, Rust.",
+  keywords: ["fullstack developer", "portfolio", "Roman Ivanov", "web development", "react", "next.js"],
   openGraph: {
     title: "~/roman — portfolio",
     description: "Fullstack developer portfolio — Roman Ivanov.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -25,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jetbrainsMono.variable}`}>
       <head>
+        <meta name="theme-color" content="#F4F4F0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </head>
       <body>{children}</body>

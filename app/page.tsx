@@ -2,7 +2,9 @@
 
 import Header from "@/app/components/Header";
 import Terminal from "@/app/components/Terminal";
-import ContactForm from "@/app/components/ContactForm";
+import dynamic from "next/dynamic";
+import { scrollToSection } from "@/lib/navigation";
+const ContactForm = dynamic(() => import("@/app/components/ContactForm"), { ssr: false });
 import SectionReveal from "@/app/components/SectionReveal";
 import GitNode from "@/app/components/GitNode";
 import ProjectsSection from "@/app/components/ProjectsSection";
@@ -261,6 +263,7 @@ const experience = [
     head: true,
     title: "Fullstack Developer",
     company: "Freelance",
+    period: "2024 - Present",
     desc: "Built and shipped full-stack web applications using Next.js and TypeScript. Developed REST APIs with NestJS and Express, connected to PostgreSQL. Containerized and deployed projects on Vercel and Render with Docker and CI/CD pipelines.",
     icon: "fa-laptop-code",
     tags: [
@@ -278,6 +281,7 @@ const experience = [
     head: false,
     title: "Laravel Fullstack Developer",
     company: "CipherTech",
+    period: "2023 - 2024",
     desc: "Developed and deployed RESTful APIs and real-time features for client projects using Laravel and Livewire. Set up WebSocket broadcasting with Laravel Reverb for live updates. Managed PostgreSQL databases and Redis caching layer.",
     icon: "fa-bolt",
     tags: ["PHP", "Laravel", "Livewire", "PostgreSQL", "Redis", "Docker"],
@@ -288,6 +292,7 @@ const experience = [
     head: false,
     title: "Symfony Fullstack Developer",
     company: "Vertex Labs",
+    period: "2022 - 2023",
     desc: "Built web applications and REST APIs for clients using Symfony framework. Integrated third-party services, worked with MySQL and Elasticsearch for data storage and search. Used Docker for local development and deployment.",
     icon: "fa-cube",
     tags: ["PHP", "Symfony", "MySQL", "Elasticsearch", "JavaScript", "Docker"],
@@ -298,6 +303,7 @@ const experience = [
     head: false,
     title: "Frontend Developer",
     company: "Freelance",
+    period: "2021 - 2022",
     desc: "Built responsive web interfaces from mockups using HTML, CSS, JavaScript, and React. Collaborated with designers to implement pixel-perfect layouts and smooth user experiences.",
     icon: "fa-paint-brush",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Figma"],
@@ -310,8 +316,9 @@ const education = [
     commit: "q3r4s5t",
     head: false,
     edu: true,
-    title: "Computer Science, BSc",
-    company: "Donbas State Engineering Academy (2018 - 2023)",
+    title: "B.Sc. Computer Science",
+    company: "Donbas State Engineering Academy",
+    period: "2018 - 2023",
     desc: "Bachelor degree in Computer Science. Studied algorithms, data structures, software engineering, and computer systems architecture.",
     icon: "fa-graduation-cap",
     tags: ["Computer Science", "Algorithms", "Software Engineering"],
@@ -323,7 +330,8 @@ const education = [
     last: true,
     edu: true,
     title: "Applied Mathematics",
-    company: "Horlivka Technical College (2011 - 2014)",
+    company: "Horlivka Technical College",
+    period: "2011 - 2014",
     desc: "Foundation in applied mathematics, mathematical modeling, and computational methods.",
     icon: "fa-calculator",
     tags: ["Applied Mathematics", "Mathematical Modeling"],
@@ -353,7 +361,7 @@ const contacts = [
     arrowHover: true,
   },
   {
-    href: "mailto:anarky13proton.me",
+    href: "mailto:anarky13@proton.me",
     icon: "fas fa-envelope",
     label: "Email",
     url: "anarky13@proton.me",
@@ -419,18 +427,6 @@ const skillCategories = {
 };
 
 export default function Home() {
-  const scrollToSection = (id: string) => {
-    const target = document.getElementById(id);
-    if (target) {
-      const header = document.querySelector("header");
-      const offset = header ? header.offsetHeight : 0;
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.pageYOffset - offset,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <>
       <Header />
@@ -492,14 +488,6 @@ export default function Home() {
                 </div>
               </div>
               <div className="self-center md:mt-0 mt-6">
-                <div className="flex items-center gap-2 mb-2 px-4 text-xs">
-                  <span className="w-3 h-3 rounded-full bg-[#FF3366]"></span>
-                  <span className="w-3 h-3 rounded-full bg-[#FFE600]"></span>
-                  <span className="w-3 h-3 rounded-full bg-[#00FF66]"></span>
-                  <span className="text-text-dark/30 ml-2 font-mono">
-                    roman_ivanov@portfolio:~$
-                  </span>
-                </div>
                 <Terminal />
               </div>
             </div>
@@ -562,15 +550,15 @@ export default function Home() {
                     into <span className="text-acid-green font-bold">Go</span>{" "}
                     and systems programming.
                   </p>
-                  <p>Remote-first, based in Eastern Europe 🇺🇦</p>
+                  <p>Remote-first, based in Ukraine 🇺🇦</p>
                   <div className="pt-4 flex flex-wrap gap-3">
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-acid-green shadow-neo-sm">
                       <i className="fas fa-map-marker-alt text-[10px]"></i>{" "}
-                      Remote, Eastern Europe
+                      Ukraine, Remote
                     </span>
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-bg-light shadow-neo-sm">
-                      <i className="fas fa-language text-[10px]"></i> RU / EN /
-                      UA
+                      <i className="fas fa-language text-[10px]"></i> EN (B2) /
+                      RU / UA
                     </span>
                     <span className="inline-flex items-center gap-1 px-3 py-1 border-2 border-text-dark text-xs font-bold bg-bg-light shadow-neo-sm">
                       <i className="fas fa-coffee text-[10px]"></i>{" "}
@@ -802,10 +790,10 @@ export default function Home() {
         </SectionReveal>
 
         <footer className="border-t-4 border-text-dark bg-bg-light py-8">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-xs sm:text-sm text-text-dark/60 text-balance text-center sm:text-left">
-                ©{" "}
+                © {new Date().getFullYear()}{" "}
                 <span className="text-text-dark font-bold">Roman Ivanov</span>.
                 Powered by{" "}
                 <span className="text-acid-green font-bold">

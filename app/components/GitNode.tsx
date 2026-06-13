@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface GitNodeProps {
   branch: string;
@@ -9,6 +9,7 @@ interface GitNodeProps {
   company: string;
   desc: string;
   icon: string;
+  period?: string;
   id?: string;
   head?: boolean;
   edu?: boolean;
@@ -23,6 +24,7 @@ export default function GitNode({
   company,
   desc,
   icon,
+  period,
   head,
   edu,
   tags,
@@ -31,10 +33,12 @@ export default function GitNode({
 }: GitNodeProps) {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const clickTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const handleClick = () => {
     setClicked(true);
-    setTimeout(() => setClicked(false), 1000);
+    clearTimeout(clickTimer.current);
+    clickTimer.current = setTimeout(() => setClicked(false), 1000);
   };
 
   return (
@@ -67,7 +71,7 @@ export default function GitNode({
             hovered ? " git-node-card--hovered" : ""
           }`}
         >
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-1">
             {head && (
               <span className="inline-block px-2 py-0.5 border-2 border-text-dark text-[9px] sm:text-[10px] font-bold bg-acid-green shadow-neo-sm leading-tight">
                 HEAD
@@ -80,7 +84,12 @@ export default function GitNode({
             )}
             <h3 className="text-sm sm:text-lg font-bold">{title}</h3>
           </div>
-          <p className="text-xs sm:text-sm text-acid-green font-bold mb-1">{company}</p>
+          <div className="flex items-center gap-2 mb-1">
+            <p className="text-xs sm:text-sm text-acid-green font-bold">{company}</p>
+            {period && (
+              <span className="text-[10px] font-mono text-text-dark/40">({period})</span>
+            )}
+          </div>
           <p className="text-xs sm:text-sm text-text-dark/70 mb-3">{desc}</p>
           {tags && (
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
