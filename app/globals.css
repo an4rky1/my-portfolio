@@ -25,8 +25,27 @@ body {
   background-color: #F4F4F0;
   color: #1A1A1A;
   background-image:
-    radial-gradient(circle, rgba(26, 26, 26, 0.055) 1px, transparent 1px);
-  background-size: 24px 24px;
+    radial-gradient(circle, rgba(26, 26, 26, 0.07) 1px, transparent 1px),
+    radial-gradient(circle, rgba(26, 26, 26, 0.03) 2px, transparent 2px);
+  background-size: 24px 24px, 48px 48px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* Floating background decorations */
+body::before {
+  content: '</>   $ cat ~/portfolio\A $ echo "dev_vibe"  ';
+  position: fixed;
+  bottom: 24px;
+  right: 32px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: rgba(26, 26, 26, 0.035);
+  font-family: var(--font-jetbrains-mono), monospace;
+  pointer-events: none;
+  z-index: 0;
+  white-space: pre;
+  text-align: right;
+  letter-spacing: 0.3px;
 }
 
 /* CRT scan lines overlay */
