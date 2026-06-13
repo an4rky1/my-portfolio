@@ -28,11 +28,13 @@ export default function ProjectCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const preloadedRef = useRef(false);
   const canplayHandlerRef = useRef<(() => void) | null>(null);
+  const isHoveringRef = useRef(false);
   const isTouchRef = useRef(false);
   const [expanded, setExpanded] = useState(false);
   const [playing, setPlaying] = useState(false);
   const poster = posterFromVideo(video);
   const [showPoster, setShowPoster] = useState(true);
+  const [posterLoaded, setPosterLoaded] = useState(false);
 
   useEffect(() => {
     isTouchRef.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -60,15 +62,39 @@ export default function ProjectCard({
   const tryPlay = useCallback(() => {
     const v = videoRef.current;
     if (!v) return;
+    isHoveringRef.current = true;
     setPlaying(true);
+
+    const play = () => {
+      if (!isHoveringRef.current) {
+        v.pause();
+        v.currentTime = 0;
+        setShowPoster(true);
+        setPlaying(false);
+        return;
+      }
+      v.play().then(() => {
+        setShowPoster(false);
+      }).catch(() => {
+        setPlaying(false);
+      });
+    };
+
+    if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      play();
+      return;
+    }
+
     v.play().then(() => {
       setShowPoster(false);
     }).catch(() => {
       setPlaying(false);
-      // video not ready yet — wait for canplay
       const onCanPlay = () => {
         v.removeEventListener('canplay', onCanPlay);
-        v.play().then(() => setShowPoster(false)).catch(() => setPlaying(false));
+        canplayHandlerRef.current = null;
+        if (isHoveringRef.current) {
+          play();
+        }
       };
       v.addEventListener('canplay', onCanPlay);
       canplayHandlerRef.current = onCanPlay;
@@ -82,6 +108,7 @@ export default function ProjectCard({
 
   const handleMouseLeave = useCallback(() => {
     if (isTouchRef.current) return;
+    isHoveringRef.current = false;
     const v = videoRef.current;
     if (!v) return;
     v.pause();
@@ -121,12 +148,19 @@ export default function ProjectCard({
           onClick={handleTap}
         >
           <div className={`absolute top-0 left-0 w-full h-1 z-10 ${color}`}></div>
-          {/* poster — shown instantly, hidden when video plays */}
+          {/* loader — shown until poster image loads */}
+          {!posterLoaded && (
+            <div className="absolute inset-0 z-[1] flex items-center justify-center bg-bg-light">
+              <i className="fas fa-spinner fa-spin text-2xl text-text-dark/20"></i>
+            </div>
+          )}
+          {/* poster — shown when loaded, hidden when video plays */}
           {showPoster && poster && (
             <img
               src={poster}
               alt={`${title} preview`}
-              className="absolute inset-0 w-full h-full object-cover z-[1]"
+              onLoad={() => setPosterLoaded(true)}
+              className={`absolute inset-0 w-full h-full object-cover z-[1] ${posterLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
           )}
           <video
