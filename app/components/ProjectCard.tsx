@@ -147,8 +147,7 @@ export default function ProjectCard({
           style={{ height: '200px' }}
           onClick={handleTap}
         >
-          <div className={`absolute top-0 left-0 w-full h-1 z-10 ${color}`}></div>
-          {/* loader — shown until poster image loads */}
+          <div className={`accent-bar absolute top-0 left-0 w-full h-1 z-10 ${color}`}></div>
           {!posterLoaded && (
             <div className="absolute inset-0 z-[1] flex items-center justify-center bg-bg-light">
               <i className="fas fa-spinner fa-spin text-2xl text-text-dark/20"></i>
@@ -183,7 +182,7 @@ export default function ProjectCard({
         </div>
       ) : (
         <div className="relative bg-bg-light overflow-hidden flex items-center justify-center border-b-4 border-text-dark shrink-0" style={{ height: '200px' }}>
-          <div className={`absolute top-0 left-0 w-full ${color} h-1`}></div>
+          <div className={`accent-bar absolute top-0 left-0 w-full ${color} h-1`}></div>
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(45deg, #1A1A1A 25%, transparent 25%, transparent 75%, #1A1A1A 75%), linear-gradient(45deg, #1A1A1A 25%, transparent 25%, transparent 75%, #1A1A1A 75%)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 10px 10px' }}></div>
           <div className="flex flex-col items-center gap-2 z-10">
             <i className="fas fa-code text-4xl text-text-dark/20"></i>

@@ -498,9 +498,9 @@ export default function Home() {
         <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
-            <i className="fas fa-chevron-down text-acid-green text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-green text-[10px] chevron-anim" style={{ animationDelay: '0s' }}></i>
             <span>~/continue</span>
-            <i className="fas fa-chevron-down text-acid-green text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-green text-[10px] chevron-anim" style={{ animationDelay: '0.15s' }}></i>
           </span>
           <div className="flex-1 h-[3px] bg-text-dark"></div>
         </div>
@@ -509,7 +509,7 @@ export default function Home() {
         <SectionReveal id="about_me" className="py-16 sm:py-24">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold">
+              <h2 className="section-heading text-2xl sm:text-3xl font-bold">
                 <span className="text-text-dark">cat</span>{" "}
                 <span className="text-acid-green">/home/about_me.txt</span>
               </h2>
@@ -651,9 +651,9 @@ export default function Home() {
         <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
-            <i className="fas fa-chevron-down text-acid-yellow text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-yellow text-[10px] chevron-anim" style={{ animationDelay: '0s' }}></i>
             <span>~/continue</span>
-            <i className="fas fa-chevron-down text-acid-yellow text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-yellow text-[10px] chevron-anim" style={{ animationDelay: '0.15s' }}></i>
           </span>
           <div className="flex-1 h-[3px] bg-text-dark"></div>
         </div>
@@ -662,7 +662,7 @@ export default function Home() {
         <SectionReveal id="projects" className="py-16 sm:py-24">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold">
+              <h2 className="section-heading text-2xl sm:text-3xl font-bold">
                 <span className="text-text-dark">ls -la</span>{" "}
                 <span className="text-acid-green">/home/projects/</span>
               </h2>
@@ -676,9 +676,9 @@ export default function Home() {
         <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
-            <i className="fas fa-chevron-down text-acid-purple text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-purple text-[10px] chevron-anim" style={{ animationDelay: '0s' }}></i>
             <span>~/continue</span>
-            <i className="fas fa-chevron-down text-acid-purple text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-purple text-[10px] chevron-anim" style={{ animationDelay: '0.15s' }}></i>
           </span>
           <div className="flex-1 h-[3px] bg-text-dark"></div>
         </div>
@@ -687,7 +687,7 @@ export default function Home() {
         <SectionReveal id="experience" className="py-12 sm:py-24">
           <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold">
+              <h2 className="section-heading text-2xl sm:text-3xl font-bold">
                 <span className="text-text-dark">git log</span>{" "}
                 <span className="text-acid-green">--oneline --graph</span>
               </h2>
@@ -709,9 +709,9 @@ export default function Home() {
         <div className="flex items-center gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex-1 h-[3px] bg-text-dark"></div>
           <span className="text-xs font-bold text-text-dark/30 tracking-[0.2em] uppercase flex items-center gap-2">
-            <i className="fas fa-chevron-down text-acid-pink text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-pink text-[10px] chevron-anim" style={{ animationDelay: '0s' }}></i>
             <span>~/continue</span>
-            <i className="fas fa-chevron-down text-acid-pink text-[10px]"></i>
+            <i className="fas fa-chevron-down text-acid-pink text-[10px] chevron-anim" style={{ animationDelay: '0.15s' }}></i>
           </span>
           <div className="flex-1 h-[3px] bg-text-dark"></div>
         </div>
@@ -720,7 +720,7 @@ export default function Home() {
         <SectionReveal id="contacts" className="py-16 sm:py-24">
           <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold">
+              <h2 className="section-heading text-2xl sm:text-3xl font-bold">
                 <span className="text-text-dark">ssh</span>{" "}
                 <span className="text-acid-green">user_name@contacts</span>
               </h2>
@@ -807,7 +807,10 @@ export default function Home() {
                 </span>
               </p>
             </div>
-            <div className="mt-4 text-center text-xs text-text-dark/30">
+            <div className="mt-4 text-center text-xs text-text-dark/20 select-none">
+              <span className="text-text-dark/40">$</span> cd ~/portfolio &amp;&amp; cat goodbye.txt
+            </div>
+            <div className="mt-1 text-center text-xs text-text-dark/30">
               <span className="text-text-dark">$</span> echo &ldquo;Thanks for
               stopping by!&rdquo;
             </div>
