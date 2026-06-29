@@ -71,6 +71,9 @@ const resumeData = {
 export default function ResumePage() {
   useEffect(() => {
     document.title = 'Roman Ivanov — Resume';
+    if (window.location.search.includes('print')) {
+      window.print();
+    }
   }, []);
 
   const handlePrint = () => {

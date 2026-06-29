@@ -472,7 +472,7 @@ export default function Home() {
                     <i className="fas fa-code-branch"></i> experience()
                   </button>
                   <a
-                    href="/resume"
+                    href="/resume?print"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="neo-btn inline-flex items-center gap-2 px-6 py-3 border-4 border-text-dark bg-bg-light text-text-dark font-bold shadow-neo text-sm sm:text-base hover:bg-acid-purple"
