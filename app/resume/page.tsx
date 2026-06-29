@@ -90,7 +90,7 @@ export default function ResumePage() {
           </button>
         </div>
 
-        <div className="bg-white border-4 border-text-dark shadow-neo-lg p-6 sm:p-10 print:border-2 print:shadow-none">
+        <div className="bg-white border-4 border-text-dark shadow-neo-lg p-6 sm:p-10 print:border-2 print:shadow-none resume-card">
           <div className="flex justify-between items-start border-b-2 border-text-dark pb-4 mb-6">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-text-dark">{resumeData.name}</h1>

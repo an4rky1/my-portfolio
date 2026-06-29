@@ -216,6 +216,52 @@ body::after {
     background: none !important;
     background-color: white !important;
   }
+
+  @page {
+    size: A4;
+    margin: 0.5cm;
+  }
+
+  .resume-card {
+    padding: 0.4rem !important;
+  }
+
+  .resume-card h1 {
+    font-size: 16px !important;
+  }
+
+  .resume-card p,
+  .resume-card div,
+  .resume-card li,
+  .resume-card span {
+    font-size: 8px !important;
+    line-height: 1.25 !important;
+  }
+
+  .resume-card ul {
+    margin-top: 1px !important;
+  }
+
+  .resume-card .gap-6,
+  .resume-card .sm\:gap-10 {
+    gap: 0.3rem !important;
+  }
+
+  .resume-card .space-y-5 > * + * {
+    margin-top: 0.2rem !important;
+  }
+
+  .resume-card .mb-6 {
+    margin-bottom: 0.2rem !important;
+  }
+
+  .resume-card .mb-4 {
+    margin-bottom: 0.15rem !important;
+  }
+
+  .resume-card .pb-4 {
+    padding-bottom: 0.15rem !important;
+  }
 }
 
 @keyframes pulse-dot {
