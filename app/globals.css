@@ -223,26 +223,26 @@ body::after {
   }
 
   .resume-card {
-    padding: 0.6rem !important;
+    padding: 0.9rem !important;
   }
 
   .resume-card h1 {
-    font-size: 22px !important;
+    font-size: 33px !important;
   }
 
   .resume-card .text-sm,
   .resume-card .sm\:text-base {
-    font-size: 11px !important;
+    font-size: 17px !important;
   }
 
   .resume-card .text-xs,
   .resume-card .sm\:text-sm {
-    font-size: 9.5px !important;
+    font-size: 14px !important;
     line-height: 1.35 !important;
   }
 
   .resume-card .text-\[11px\] {
-    font-size: 9px !important;
+    font-size: 13px !important;
   }
 
   .resume-card .leading-relaxed {
@@ -250,36 +250,36 @@ body::after {
   }
 
   .resume-card ul {
-    margin-top: 2px !important;
+    margin-top: 3px !important;
   }
 
   .resume-card .gap-6,
   .resume-card .sm\:gap-10 {
-    gap: 0.6rem !important;
+    gap: 0.9rem !important;
   }
 
   .resume-card .space-y-5 > * + * {
-    margin-top: 0.35rem !important;
+    margin-top: 0.5rem !important;
   }
 
   .resume-card .mb-6 {
-    margin-bottom: 0.4rem !important;
+    margin-bottom: 0.6rem !important;
   }
 
   .resume-card .mb-4 {
-    margin-bottom: 0.3rem !important;
+    margin-bottom: 0.45rem !important;
   }
 
   .resume-card .pb-4 {
-    padding-bottom: 0.3rem !important;
+    padding-bottom: 0.45rem !important;
   }
 
   .resume-card .border-b-2 {
-    border-bottom-width: 1px !important;
+    border-bottom-width: 1.5px !important;
   }
 
   .resume-card .border-4 {
-    border-width: 1.5px !important;
+    border-width: 2px !important;
   }
 
   .resume-card .sm\:w-\[35\%\] {
